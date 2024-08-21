@@ -1,0 +1,12 @@
+//- Normall Mixin
+mixin skillList 
+   ul(class='fromMixin')
+      li PHP
+      li MySQL
+      li Sass
+      li YII Framework
+      li(clss='allAreConnected') This Is #{themeName} Theme
+
+//- Normall mixin feels like function
+mixin feature(featName)
+   div(class='feelsLikeFunc feat' style='color:#000;')=featName

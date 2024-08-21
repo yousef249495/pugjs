@@ -1,0 +1,15 @@
+//- Git all content from main page
+extend index.pug
+
+block title 
+    title about me
+
+append styles
+    link(rel="stylesheet", href="css/about_2.css")
+    
+block prepend styles
+    link(rel="stylesheet", href="css/about_1.css")
+
+
+block testingContent
+    p.test This Content Now From About Page

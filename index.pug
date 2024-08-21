@@ -1,39 +1,103 @@
-doctype
+include includes/vars.pug
+include includes/mixins
+doctype html
 html(lang='en')
-    head 
+   head 
       meta(charset='utf-8')
-      meta(name='description',
-      content="Learn PugJs"
-      )
-      title My Resume
-      link(rel='stylesheet', href='./css/bootsrap.css_')
-      link(rel='stylesheet', href='./css/main.css_')
-    body 
-         div(class='main-container' id='main')
-            //- 
-               Comment in here only
-            // 
-               Comment in HTML
-            h2(class='main-title') My Skills
-            ul(class="main-list")
-                li PHP
-                li MySQL
-                li Sass
-                li 
-                  | Pugjs 
-                  |
-                  span test
-            p I love <b>Pugjs</b> And <b>Sass</b>
-            p 
-               | I love 
+      meta(name='description', content="Learn PugJs")
+      block title
+         title My Resume
+      block styles
+         include includes/styles.pug 
+   body
+      block testingContent
+         .main This From Main Page
+      div(class='main-container' id='main')
+         //- Comment in here only
+         // Comment in HTML
+         +skillList
+         +feature('Cheap Price')
+         +feature('Fast Support')
+         +feature('Clean Code')
+         h2(class='main-title') My Skills
+         ul(class="main-list")
+            li PHP 
+            li MySQL
+            li Sass
+            li 
+               | Pugjs 
                |
-               b Pugjs
-               |
-               |  And
-               | 
-               b Sass
+               span test
+         +skillList
+         div(class='parent')
+            div(class='child ' + className)
+         div= 'This <strong>Tag</strong> Will Appear'
+         div!= 'This <strong>Tag</strong> Will Not Appear'
+         //
+         h2 For Loop
+         ul.loop-1
+            - for(let i = 1; i <= 5; i++)
+               li item #{i} #{themeTag}
+               li item #{i} !{themeTag}
+         //  
+         h2 While Loop
+         - let i = 1
+         ul
+            - while (i <= 5)
+               li= 'Item' + ' ' + i++ 
+         //
+         h2 Loop on Array
+         - const fruits = ['Apple', 'Banana', 'Cherry']
+         ul.loopForArray 
+            - for (let fruit of fruits)
+               li= fruit
+         //
+         h2 Loop on Array by 'each' of pugjs
+         ul
+            - let x = 0
+            each fruit, index in ['Apple', 'Banana', 'Cherry']
+               li
+                  p= index + " : " + fruit
+            else
+               div There Are no Values
+         //
+         h2 Loop on Array by 'each' of pugjs
+         ul
+            - const myArray = ['Apple', 'Banana', 'Cherry']
+            each fruit, index in myArray.length ? myArray : ['There no Values']
+               li
+                  p= index + " : " + fruit
+         //
+         h2 Loop on Object
+         - const user = { name: 'John', age: 30, city: 'New York' }
+         ul.loopForObject
+            - for (let key in user)
+               li= key + ':' + user[key]
+
+         p I love <b>Pugjs</b> And <b>Sass</b>
+         p 
+            | I love 
             |
+            b Pugjs
             |
-            .
-               This Is text
-         .class Hello
+            |  And
+            | 
+            b Sass
+         |
+         |
+         .
+            This Is Text in #{themeName}
+         
+         div This Is Text in #{themeName.toUpperCase()}
+         div This Is Text in \#{Test}
+         div This Is Text in #{'#{Test}'}
+         div This Interpolation <b>Test</b>
+         div.inter This Interpolation #[b Test]
+         div.inter This Interpolation #[b.pug Test]
+
+      - let friends = 0
+      case friends
+         when 0: - break
+         when 1: p you have one friend
+         default: p you have friends
+      include includes/scripts.pug
